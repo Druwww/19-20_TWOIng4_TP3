@@ -2,8 +2,6 @@
 // Fonction appelée lors du click du bouton
 function start() {
 
-  console.log("Resultat : ", document.getElementById("city-input").value);
-
   // Création de l'objet apiWeather
   const apiWeather = new API_WEATHER(document.getElementById("city-input").value);
   // Appel de la fonction fetchTodayForecast
@@ -13,6 +11,8 @@ function start() {
     .then(function(response) {
       // Récupère la donnée d'une API
       const data = response.data;
+
+      //console.log(response.data);
 
       // On récupère l'information principal
       const main = data.weather[0].main;
@@ -25,6 +25,39 @@ function start() {
       document.getElementById('today-forecast-more-info').innerHTML = description;
       document.getElementById('icon-weather-container').innerHTML = icon;
       document.getElementById('today-forecast-temp').innerHTML = `${temp}°C`;
+      
+    })
+    .catch(function(error) {
+      // Affiche une erreur
+      console.error(error);
+    });
+
+
+    apiWeather
+    .fetchDaysForecast()
+    .then(function(response) {
+      // Récupère la donnée d'une API
+      const data = response.data;
+
+      console.log(response.data);
+
+      main = [];
+      description = [];
+      temp = [];
+      icon =[];
+
+
+      for(let i = 1; i < 4; i++){
+        main.push(data.list[i].weather[0].main);
+        description.push(data.list[i].weather[0].description);
+        temp.push(data.);//finir làà
+      }
+
+      const main = data.weather[0].main;
+      const description = data.weather[0].description;
+      const temp = data.main.temp;
+      const icon = apiWeather.getHTMLElementFromIcon(data.weather[0].icon);
+
       
     })
     .catch(function(error) {
