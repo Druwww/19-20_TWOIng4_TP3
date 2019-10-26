@@ -31,7 +31,7 @@ class API_WEATHER{
 
   fetchDaysForecast(){
     return axios
-    .get(`${API_DAYS_URL}?q=${this.city}&appid=${API_KEY}&cnt=4`, {
+    .get(`${API_DAYS_URL}?q=${this.city}&units=metric&appid=${API_KEY}&cnt=4`, {
       crossdomain: true
     })
   }

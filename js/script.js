@@ -50,15 +50,32 @@ function start() {
       for(let i = 1; i < 4; i++){
         main.push(data.list[i].weather[0].main);
         description.push(data.list[i].weather[0].description);
-        temp.push(data.);//finir làà
+        temp.push(data.list[i].temp.day);
+        icon.push(apiWeather.getHTMLElementFromIcon(data.list[i].weather[0].icon));
+      }
+      
+      // document.getElementById('today-forecast-main').innerHTML = main;
+      // document.getElementById('today-forecast-more-info').innerHTML = description;
+      // document.getElementById('icon-weather-container').innerHTML = icon;
+      // document.getElementById('today-forecast-temp').innerHTML = `${temp}°C`;
+
+
+      forMain = document.getElementsByClassName('mainHTML');
+      forDescription = document.getElementsByClassName('descriptionHTML');
+      forIcon = document.getElementsByClassName('iconHTML');
+      forTemp = document.getElementsByClassName('tempHTML');
+
+      for(let i = 0; i < 3; i++){
+        forMain[i].innerHTML = main[i];
+        forDescription[i].innerHTML = description[i];
+        forIcon[i].innerHTML = icon[i];
+        myTemp = temp[i];
+        forTemp[i].innerHTML = `${myTemp}°C`;
       }
 
-      const main = data.weather[0].main;
-      const description = data.weather[0].description;
-      const temp = data.main.temp;
-      const icon = apiWeather.getHTMLElementFromIcon(data.weather[0].icon);
 
-      
+      //console.log(main);
+
     })
     .catch(function(error) {
       // Affiche une erreur
